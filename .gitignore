@@ -31,3 +31,5 @@
 *.in
 *.out
 *.app
+
+.vscode
