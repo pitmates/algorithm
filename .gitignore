@@ -35,4 +35,12 @@
 .vscode
 .log
 
+# mac
 .DS_Store
+# mac execute file
+a
+b
+c
+d
+e
+f
