@@ -33,6 +33,7 @@
 *.app
 
 .vscode
+workspace
 .log
 
 # mac
