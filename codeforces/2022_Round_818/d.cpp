@@ -10,38 +10,30 @@
 
 using namespace std;
 
+const ll M = 1e9+7;
+
 int main()
 {
 //freopen("a.in", "r", stdin);
     ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0);
-    int T;
-    cin >> T;
-    while (T--) {
-        int n;
-        cin >> n;
-        vector<int> a(n), b(n);
-        for (int i = 0; i < n; ++i) {
-            cin >> a[i];
-        }
-        for (int i = 0; i < n; ++i) {
-            cin >> b[i];
-        }
 
-        vector<int> c(n), d(n);
-        int res = 0;
-        for (int i = 30; i >= 0; --i) {
-            res ^= 1 << i;
-            for (int j = 0; j < n; ++j) {
-                c[j] = a[j] & res;
-                d[j] = (b[j] & res) ^ res;
-            }
-            sort(c.begin(), c.end());
-            sort(d.begin(), d.end());
-            
-            if (c != d) res ^= 1 << i;
-        }
-        cout << res << endl;
+    int n, m;
+    cin >> n >> m;
+    if (m > n) m = n;
+    vector<ll> inv(n);
+    inv[1] = 1;
+    for (int i = 2; i <= m; ++i) {
+        inv[i] = (M - M/i) * inv[M%i] % M;
     }
+
+    ll res = 1, now = 1;
+    if (m == n) res = 2, m--;
+    for (int i = 1; i <= m; ++i) {
+        now = (now * (n-i+1) % M) * inv[i] % M;
+        res = (now + res) % M;
+    }
+    
+    cout << res << endl;
 
     return 0;
 }
